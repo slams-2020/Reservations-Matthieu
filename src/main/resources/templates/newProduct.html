@@ -1,7 +1,7 @@
 <div>
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{ on, attrs }">
-      	<v-btn icon v-bind="attrs" v-on="on" v-on:click="isNew = true;orga={};"> <v-icon>mdi-domain-plus</v-icon></v-btn>
+      	<v-btn icon v-bind="attrs" v-on="on" v-on:click="isNew = true;produc={};"> <v-icon>mdi-domain-plus</v-icon></v-btn>
       </template>
 
       <v-card>
@@ -12,15 +12,21 @@
 	        <v-container>
             <v-row>
             	<v-col cols="12">
-                	<v-text-field v-model="orga.name" label="Name*" required></v-text-field>
+                	<v-text-field v-model="produc.title" label="Title*" required></v-text-field>
                 </v-col>
 			</v-row>
+			
+			
 			<v-row>
               <v-col cols="12" sm="6" md="6">
-                <v-text-field v-model="orga.domain" label="Domain"></v-text-field>
+                <v-text-field v-model="produc.type" label="Type"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="6">
-                <v-text-field v-model="orga.aliases" label="Aliases"></v-text-field>
+                <v-text-field v-model="produc.description" label="Description"></v-text-field>
+              </v-col>
+              
+              <v-col cols="12" sm="6" md="6">
+                <v-text-field v-model="produc.price" label="Price"></v-text-field>
               </v-col>
             </v-row>
           </v-container>
@@ -30,8 +36,8 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn v-if="!isNew" color="green" text @click="updateOrga">Modifier</v-btn>
-          <v-btn v-if="isNew" color="green" text @click="addOrga">Ajouter</v-btn>
+          <v-btn v-if="!isNew" color="green" text @click="updateProduc">Modifier</v-btn>
+          <v-btn v-if="isNew" color="green" text @click="addProduc">Ajouter</v-btn>
           <v-btn text @click="dialog = false">Annuler</v-btn>
         </v-card-actions>
       </v-card>

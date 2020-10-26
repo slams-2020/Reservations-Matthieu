@@ -23,30 +23,36 @@ import io.github.jeemv.springboot.vuejs.utilities.JsArray;
 			return this.vue;
 		}
 
-		@RequestMapping("/orgas")
+		@RequestMapping("/prods")
 		public String index(ModelMap model) {
-			vue.addDataRaw("orgas", "[]");
-			vue.addDataRaw("orga", "{}");
-			vue.addDataRaw("oOrga", "{}");
+			vue.addDataRaw("prods", "[]");
+			vue.addDataRaw("produc", "{}");
+			vue.addDataRaw("pProduct", "{}");
 			vue.addData("dialog", false);
 			vue.addData("isNew", false);
 			vue.addData("message", false);
 
-			vue.addComputed("dialogTitle", "return this.isNew?'Nouvelle organisation':'Mise à jour';");
+			vue.addComputed("dialogTitle", "return this.isNew?'Nouveau Produit':'Mise à jour';");
 
-			vue.onBeforeMount("let self=this;" + Http.get(restURL + "organizations", "self.orgas=response.data;"));
+			vue.onBeforeMount("let self=this;" + Http.get(restURL + "products", "self.prods=response.data;"));
 
-			vue.addMethod("addOrga", "let self=this;" + Http.post(restURL + "organizations", "self.orga", "self.orgas.push(response.data);self.dialog=false;self.showMsg('success','Organisation '+self.orga.name+' ajoutée !');", "self.showMsg('error',response);"));
+			vue.addMethod("addProduc", "let self=this;" + Http.post(restURL + "products", "self.produc", "self.prods.push(response.data);self.dialog=false;self.showMsg('success','Product '+self.produc.title+' ajoutée !');", "self.showMsg('error',response);"));
 
-			vue.addMethod("editOrga", "this.dialog=true;this.oOrga=orga;this.orga=Object.assign({},orga);this.isNew=false;", "orga");
+			vue.addMethod("editProduc", "this.dialog=true;this.pProduct=produc;this.produc=Object.assign({},produc);this.isNew=false;", "produc");
 
-			vue.addMethod("updateOrga", "let self=this;" + Http.patch("'" + restURL + "organizations/'+self.orga.id", "self.orga", "Object.assign(self.oOrga, self.orga);self.dialog=false;self.showMsg('info','Organisation '+self.orga.name+' modifiée !')", "console.log(response);"), "orga");
+			vue.addMethod("updateProduc", "let self=this;" + Http.patch("'" + restURL + "products/'+self.produc.id", "self.produc", "Object.assign(self.pProduct, self.produc);self.dialog=false;self.showMsg('info','Product '+self.produc.title+' modifiée !')", "console.log(response);"), "produc");
 
-			vue.addMethod("deleteOrga", "let self=this;" + Http.delete("'" + restURL + "organizations/'+orga.id", JsArray.remove("self.orgas", "orga")) + ";self.showMsg('warning','Organisation '+orga.name+' supprimée !');", "orga");
+			vue.addMethod("deleteProduc", "let self=this;" + Http.delete("'" + restURL + "products/'+produc.id", JsArray.remove("self.prods", "produc")) + ";self.showMsg('warning','Product '+produc.title+' supprimée !');", "produc");
 
 			vue.addMethod("showMsg", "this.message={'type':type,'content':content};", "type", "content");
 
 			return "index";
 		}
 	}
-}
+// org = prod
+// orgas = prods
+// orga = produc
+// Orga = Produc
+// organizations = products
+// Organisation = Product
+// oOrga = pProduct

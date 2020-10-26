@@ -3,34 +3,37 @@
 <v-card max-width="1024" class="mx-auto">
 	<v-toolbar	color="light-blue" dark> 
 		<v-app-bar-nav-icon></v-app-bar-nav-icon>
-		<v-toolbar-title>Organisations</v-toolbar-title>
+		<v-toolbar-title>Reservations</v-toolbar-title>
 		<v-spacer></v-spacer>
 		<v-btn icon> <v-icon>mdi-magnify</v-icon> </v-btn> 
-		{{> newOrga}}
+		{{> newProduc}}
 	</v-toolbar> 
 	<v-list subheader dense two-line>
 	    <v-container v-if="message" transition="expand"><v-alert prominent outlined :type="message.type"><% message.content %></v-alert></v-container>
-	    <template v-for="(org, index) in orgas">
+	    <template v-for="(prod, index) in prods">
 			<v-list-item :key="index">
 				<v-list-item-avatar> 
 					<v-icon class="grey lighten-1"	dark> mdi-domain </v-icon>
 				</v-list-item-avatar>
 				<v-list-item-content>
-					<v-list-item-title v-text="org.name"></v-list-item-title>
-					<v-list-item-subtitle v-text="org.domain"></v-list-item-subtitle>
+					<v-list-item-title v-text="prod.title"></v-list-item-title>
+					<v-list-item-subtitle v-text="prod.idProduct"></v-list-item-subtitle>
+					<v-list-item-subtitle v-text="prod.type"></v-list-item-subtitle>
+					<v-list-item-subtitle v-text="prod.description"></v-list-item-subtitle>
+					<v-list-item-subtitle v-text="prod.price"></v-list-item-subtitle>
 				</v-list-item-content>
 				<v-list-item-action>
 					<v-row>
-						<v-btn elevation="1" icon v-on:click="editOrga(org)"> 
+						<v-btn elevation="1" icon v-on:click="editProduc(prod)"> 
 							<v-icon color="green lighten-1">mdi-tooltip-edit-outline</v-icon>
 						</v-btn>
-						<v-btn elevation="1" icon v-on:click="deleteOrga(org)">
+						<v-btn elevation="1" icon v-on:click="deleteProduc(prod)">
 							<v-icon color="red lighten-1">mdi-bookmark-remove-outline</v-icon>
 						</v-btn>
 					</v-row>
 				</v-list-item-action> 
 			</v-list-item>
-		    <v-divider v-if="index < orgas.length - 1"></v-divider>
+		    <v-divider v-if="index < prods.length - 1"></v-divider>
          </template>
 	</v-list>
 </v-card>
@@ -40,3 +43,4 @@
 
 {{>footer}}
 {{{vue}}}
+

@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import net.reservations.models.Product;
 import net.reservations.models.User;
 import net.reservations.repositories.ProductRepository;
+import net.reservations.repositories.UserRepository;
 
 @Controller
 @RequestMapping("product")
 public class productController {
 	
 	@Autowired
-    private ProductRepository urepo;
+    private UserRepository urepo;
 	
 	@Autowired
     private ProductRepository prepo;
